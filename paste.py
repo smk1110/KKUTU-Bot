@@ -1,22 +1,17 @@
-import hangul_to_english
+import hangul
 import keyboard
 import mouse
-from pyautogui import position, click, move 
+from pyautogui import position, click
 from time import sleep
 level = int(input("Automation Level(between 1 and 3) : "))
 if level==1:
     while True:
         a= input()
-        splited = []
-        hangul_to_english.result = []
-        for i in range(len(a)):
-            splited.append(a[i])
         mouse.wait(button='left', target_types=('down',))
-        for i in splited:
-            hangul_to_english.main(i)
-        for j in hangul_to_english.result:
-            keyboard.press_and_release(j)
+        for i in hangul.convert(a):
+            keyboard.press_and_release(i)
             sleep(0.01)
+
 if level==2:
     mouse.wait(button='right', target_types=('down',))
     prompt_position = position()
@@ -24,22 +19,32 @@ if level==2:
     while True:
         a= input()
         click(prompt_position.x, prompt_position.y ,clicks=1, interval=0, button='left')
-        splited = []
-        hangul_to_english.result = []
-        for i in range(len(a)):
-            splited.append(a[i])
-        for i in splited:
-            hangul_to_english.main(i)
-        for j in hangul_to_english.result:
-            keyboard.press_and_release(j)
+        mouse.wait(button='left', target_types=('down',))
+        for i in hangul.convert(a):
+            keyboard.press_and_release(i)
+            sleep(0.01)
+        keyboard.send('enter')
+if level==3:
+    mouse.wait(button='right', target_types=('down',))
+    prompt_position = position()
+    print("Registered!")
+    while True:
+        a= input()
+        if hangul.is_hangul(a):
+            try:
+                file = open("Text_files\\"+a+".txt", 'r', encoding='utf-8')
+            except FileNotFoundError:
+                print("File not found.")
+                continue
+            text=file.readline()
+            file.close
+        else: text=a
+        click(prompt_position.x, prompt_position.y ,clicks=1, interval=0, button='left')
+        for i in hangul.convert(text):
+            keyboard.press_and_release(i)
             sleep(0.01)
         keyboard.send('enter')
         
-
-
-
-if level==3:
-    pass
 
 
         
