@@ -13,11 +13,11 @@ while True:
         g = open(".\\"+folder_name+"\\"+word+".txt", "w",encoding='utf-8')
         while True:
             text=f.readline()
-            title_index=text.find("title=\"")
-            if title_index!=-1:
-                content = text[text.find("\">")+2: text.find("</", title_index)]
+            title_index=text.find("<td><a")
+            if title_index==0:
+                content = text[text.find("\">")+2: text.find("</a></td>")]
                 g.write(content+"\n")
-            elif "</td></tr></tbody></table>" in text:
+            elif "</table>" in text:
                 g.close()
                 break
     elif "<!--" in text:
