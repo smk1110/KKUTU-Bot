@@ -86,7 +86,3 @@ if level==3:
             keyboard.press_and_release(i)
             sleep(0.01)
         keyboard.send('enter')
-        
-
-
-        
