@@ -1,5 +1,5 @@
 import hangul
-import keyboard
+from keyboard import press_and_release
 import mouse
 from pyautogui import position, click
 from time import sleep
@@ -9,7 +9,7 @@ if level==1:
         a= input()
         mouse.wait(button='left', target_types=('down',))
         for i in hangul.convert(a):
-            keyboard.press_and_release(i)
+            press_and_release(i)
             sleep(0.01)
 
 if level==2:
@@ -21,9 +21,9 @@ if level==2:
         click(prompt_position.x, prompt_position.y ,clicks=1, interval=0, button='left')
         mouse.wait(button='left', target_types=('down',))
         for i in hangul.convert(a):
-            keyboard.press_and_release(i)
+            press_and_release(i)
             sleep(0.01)
-        keyboard.send('enter')
+        press_and_release('enter')
 if level==3:
     mouse.wait(button='right', target_types=('down',))
     prompt_position = position()
@@ -83,6 +83,6 @@ if level==3:
                 
         click(prompt_position.x, prompt_position.y ,clicks=1, interval=0, button='left')
         for i in hangul.convert(text):
-            keyboard.press_and_release(i)
+            press_and_release(i)
             sleep(0.01)
-        keyboard.send('enter')
+        press_and_release('enter')
