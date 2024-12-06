@@ -13,6 +13,7 @@ if level==1:
             sleep(0.01)
 
 if level==2:
+    print("입력창 위치 등록...")
     mouse.wait(button='right', target_types=('down',))
     prompt_position = position()
     print("Registered!")
@@ -25,8 +26,13 @@ if level==2:
             sleep(0.01)
         press_and_release('enter')
 if level==3:
+    print("입력창 위치 등록...")
     mouse.wait(button='right', target_types=('down',))
     prompt_position = position()
+
+    print("프로그램 창 위치 등록 ...")
+    mouse.wait(button='right', target_types=('down',))
+    program_position = position()
     print("Registered!")
     history=dict()
     del_list=list()
@@ -65,7 +71,7 @@ if level==3:
                 print("File not found.")
                 continue
             read=file.readline()
-            while not read == '':
+            while read:
                 if target in read:
                     imsi.append(read)
                 read=file.readline()
@@ -86,3 +92,5 @@ if level==3:
             press_and_release(i)
             sleep(0.01)
         press_and_release('enter')
+        sleep(0.1)
+        click(program_position.x, program_position.y ,clicks=1, interval=0, button='left')
